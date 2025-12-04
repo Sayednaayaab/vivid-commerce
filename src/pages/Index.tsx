@@ -1,12 +1,36 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { CartSidebar } from "@/components/cart/CartSidebar";
+import { HeroSection } from "@/components/home/HeroSection";
+import { CategoriesSection } from "@/components/home/CategoriesSection";
+import { ProductGridSection } from "@/components/home/ProductGridSection";
+import { FlashSaleSection } from "@/components/home/FlashSaleSection";
+import { TestimonialsSection } from "@/components/home/TestimonialsSection";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <CartSidebar />
+      
+      <main>
+        <HeroSection />
+        <CategoriesSection />
+        <ProductGridSection 
+          title="Featured Products" 
+          subtitle="Hand-picked favorites from our collection"
+          type="featured"
+        />
+        <FlashSaleSection />
+        <ProductGridSection 
+          title="New Arrivals" 
+          subtitle="Fresh styles just landed"
+          type="new"
+        />
+        <TestimonialsSection />
+      </main>
+
+      <Footer />
     </div>
   );
 };
