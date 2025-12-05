@@ -191,7 +191,7 @@ export default function Products() {
             {/* Filters Sidebar */}
             <aside
               className={cn(
-                "w-64 shrink-0 space-y-6",
+                "w-64 shrink-0",
                 "hidden lg:block",
                 showFilters && "fixed inset-0 z-50 bg-background p-6 lg:relative lg:p-0 block"
               )}
@@ -205,57 +205,60 @@ export default function Products() {
                 </div>
               )}
 
-              {/* Categories */}
-              {currentCategory && (
+              {/* Make the categories/price sections sticky on large screens */}
+              <div className="space-y-6 lg:sticky lg:top-24 lg:max-h-[calc(100vh-6rem)] lg:overflow-auto">
+                {/* Categories */}
+                {currentCategory && (
+                  <div>
+                    <h3 className="font-semibold mb-3">Categories</h3>
+                    <ul className="space-y-2">
+                      {currentCategory.subcategories.map((sub) => (
+                        <li key={sub.slug}>
+                          <a
+                            href={`/products/${category}/${sub.slug}`}
+                            className={cn(
+                              "text-sm transition-colors",
+                              subcategory === sub.slug
+                                ? "text-primary font-medium"
+                                : "text-muted-foreground hover:text-foreground"
+                            )}
+                          >
+                            {sub.name}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Price Range */}
                 <div>
-                  <h3 className="font-semibold mb-3">Categories</h3>
-                  <ul className="space-y-2">
-                    {currentCategory.subcategories.map((sub) => (
-                      <li key={sub.slug}>
-                        <a
-                          href={`/products/${category}/${sub.slug}`}
-                          className={cn(
-                            "text-sm transition-colors",
-                            subcategory === sub.slug
-                              ? "text-primary font-medium"
-                              : "text-muted-foreground hover:text-foreground"
-                          )}
-                        >
-                          {sub.name}
-                        </a>
-                      </li>
+                  <h3 className="font-semibold mb-3">Price Range</h3>
+                  <div className="space-y-2">
+                    {priceRanges.map((range) => (
+                      <label key={range.value} className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={selectedPrices.includes(range.value)}
+                          onChange={() => togglePrice(range.value)}
+                          className="w-4 h-4 rounded border-border text-primary focus:ring-primary"
+                        />
+                        <span className="text-sm text-muted-foreground">{range.label}</span>
+                      </label>
                     ))}
-                  </ul>
+                  </div>
                 </div>
-              )}
 
-              {/* Price Range */}
-              <div>
-                <h3 className="font-semibold mb-3">Price Range</h3>
-                <div className="space-y-2">
-                  {priceRanges.map((range) => (
-                    <label key={range.value} className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={selectedPrices.includes(range.value)}
-                        onChange={() => togglePrice(range.value)}
-                        className="w-4 h-4 rounded border-border text-primary focus:ring-primary"
-                      />
-                      <span className="text-sm text-muted-foreground">{range.label}</span>
-                    </label>
-                  ))}
-                </div>
+                {showFilters && (
+                  <Button
+                    variant="hero"
+                    className="w-full mt-6 lg:hidden"
+                    onClick={() => setShowFilters(false)}
+                  >
+                    Apply Filters
+                  </Button>
+                )}
               </div>
-
-              {showFilters && (
-                <Button
-                  variant="hero"
-                  className="w-full mt-6 lg:hidden"
-                  onClick={() => setShowFilters(false)}
-                >
-                  Apply Filters
-                </Button>
-              )}
             </aside>
 
             {/* Products Grid */}
