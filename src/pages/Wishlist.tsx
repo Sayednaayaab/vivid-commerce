@@ -76,10 +76,10 @@ export default function Wishlist() {
                     </p>
                     <h3 className="font-medium text-sm line-clamp-1">{product.name}</h3>
                     <div className="flex items-center gap-2">
-                      <span className="font-semibold">${product.price}</span>
+                      <span className="font-semibold">₹{product.price}</span>
                       {product.originalPrice && (
-                        <span className="text-sm text-muted-foreground line-through">
-                          ${product.originalPrice}
+                        <span className="text-muted-foreground line-through text-sm">
+                          ₹{product.originalPrice}
                         </span>
                       )}
                     </div>

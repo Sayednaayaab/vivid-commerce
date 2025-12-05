@@ -37,6 +37,16 @@ export function ProductCard({ product, className }: ProductCardProps) {
 
         {/* Badges */}
         <div className="absolute top-3 left-3 flex flex-col gap-2">
+          {product.isBestseller && (
+            <span className="px-3 py-1 text-xs font-semibold bg-blue-600 text-white rounded-full">
+              ⭐ BESTSELLER
+            </span>
+          )}
+          {product.isTrending && (
+            <span className="px-3 py-1 text-xs font-semibold bg-amber-500 text-white rounded-full animate-pulse">
+              🔥 TRENDING
+            </span>
+          )}
           {product.isNew && (
             <span className="px-3 py-1 text-xs font-semibold bg-foreground text-background rounded-full">
               NEW
@@ -97,10 +107,10 @@ export function ProductCard({ product, className }: ProductCardProps) {
           <span className="text-xs text-muted-foreground">({product.reviewCount})</span>
         </div>
         <div className="flex items-center gap-2 pt-1">
-          <span className="font-semibold">${product.price}</span>
+          <span className="font-semibold">₹{product.price}</span>
           {product.originalPrice && (
             <span className="text-sm text-muted-foreground line-through">
-              ${product.originalPrice}
+              ₹{product.originalPrice}
             </span>
           )}
         </div>

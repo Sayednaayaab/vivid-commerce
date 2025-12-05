@@ -2,6 +2,7 @@ export interface Product {
   id: string;
   name: string;
   description: string;
+  longDescription?: string;
   price: number;
   originalPrice?: number;
   images: string[];
@@ -10,12 +11,20 @@ export interface Product {
   tags: string[];
   rating: number;
   reviewCount: number;
+  reviews?: {
+    user: string;
+    rating: number;
+    comment: string;
+    date: string;
+  }[];
   inStock: boolean;
   sizes?: string[];
   colors?: { name: string; hex: string }[];
   brand: string;
   isNew?: boolean;
   isFeatured?: boolean;
+  isTrending?: boolean;
+  isBestseller?: boolean;
   discount?: number;
 }
 

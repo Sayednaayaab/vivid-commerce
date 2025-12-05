@@ -89,7 +89,7 @@ export function CartSidebar() {
                           <Plus className="w-3 h-3" />
                         </Button>
                       </div>
-                      <span className="font-semibold">${(item.product.price * item.quantity).toFixed(2)}</span>
+                      <span className="font-semibold">₹{(item.product.price * item.quantity).toFixed(2)}</span>
                     </div>
                   </div>
                   <Button
@@ -109,9 +109,9 @@ export function CartSidebar() {
         {/* Footer */}
         {items.length > 0 && (
           <div className="p-4 border-t border-border space-y-4">
-            <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center justify-between text-sm">
               <span className="text-muted-foreground">Subtotal</span>
-              <span className="font-semibold">${getTotalPrice().toFixed(2)}</span>
+              <span className="font-semibold">₹{getTotalPrice().toFixed(2)}</span>
             </div>
             <p className="text-xs text-muted-foreground">
               Shipping and taxes calculated at checkout

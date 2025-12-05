@@ -10,6 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Separator } from "@/components/ui/separator";
 import { useCart } from "@/hooks/useCart";
 import { useOrders } from "@/hooks/useOrders";
+import { OrderSuccessModal } from "@/components/checkout/OrderSuccessModal";
 import { ShippingAddress, PaymentMethod } from "@/types/order";
 import { 
   CreditCard, 
@@ -34,6 +35,7 @@ const { items, getTotalPrice, clearCart } = useCart();
   const { addOrder } = useOrders();
   const [currentStep, setCurrentStep] = useState<CheckoutStep>('shipping');
   const [isProcessing, setIsProcessing] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const [shippingAddress, setShippingAddress] = useState<ShippingAddress>({
     firstName: '',
@@ -49,6 +51,7 @@ const { items, getTotalPrice, clearCart } = useCart();
   });
 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('credit_card');
+  const [paymentType, setPaymentType] = useState<'online' | 'offline'>('online');
   const [cardDetails, setCardDetails] = useState({
     cardNumber: '',
     cardHolder: '',
@@ -108,8 +111,13 @@ const { items, getTotalPrice, clearCart } = useCart();
     const order = addOrder(items, shippingAddress, paymentMethod, subtotal);
     clearCart();
     
-    toast.success("Order placed successfully!");
-    navigate(`/order-confirmation/${order.id}`);
+    // Show success modal
+    setShowSuccessModal(true);
+    
+    // Redirect after 3 seconds
+    setTimeout(() => {
+      navigate(`/order-confirmation/${order.id}`);
+    }, 3000);
   };
 
   const paymentMethods = [
@@ -119,6 +127,7 @@ const { items, getTotalPrice, clearCart } = useCart();
     { id: 'apple_pay', name: 'Apple Pay', icon: Wallet, description: 'Pay with Face ID or Touch ID' },
     { id: 'google_pay', name: 'Google Pay', icon: Wallet, description: 'Quick mobile payment' },
     { id: 'bank_transfer', name: 'Bank Transfer', icon: Building2, description: 'Direct bank transfer' },
+    { id: 'cash_on_delivery', name: 'Cash on Delivery', icon: Wallet, description: 'Pay with cash when your order is delivered' },
   ];
 
   if (items.length === 0) {
@@ -301,7 +310,7 @@ const { items, getTotalPrice, clearCart } = useCart();
                         </div>
                       </div>
                       <span className="font-semibold">
-                        {option.price === 0 ? 'FREE' : `$${option.price.toFixed(2)}`}
+                        {option.price === 0 ? 'FREE' : `₹${option.price.toFixed(2)}`}
                       </span>
                     </div>
                   ))}
@@ -326,6 +335,51 @@ const { items, getTotalPrice, clearCart } = useCart();
                 </Button>
 
                 <h2 className="text-2xl font-bold mb-6">Payment Method</h2>
+
+                {/* Payment Type Selection */}
+                <div className="mb-6">
+                  <Label className="text-base font-semibold mb-3 block">Select Payment Type</Label>
+                  <RadioGroup value={paymentType} onValueChange={(v) => setPaymentType(v as 'online' | 'offline')}>
+                    <div className="grid md:grid-cols-2 gap-4 mb-6">
+                      <div
+                        className={`flex items-center gap-3 p-4 rounded-lg border-2 cursor-pointer transition-colors ${
+                          paymentType === 'online' 
+                            ? 'border-primary bg-primary/5' 
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                        onClick={() => setPaymentType('online')}
+                      >
+                        <RadioGroupItem value="online" id="payment-online" />
+                        <div>
+                          <Label htmlFor="payment-online" className="font-medium cursor-pointer">
+                            Online Payment
+                          </Label>
+                          <p className="text-xs text-muted-foreground">Credit/Debit card, Wallet, UPI, etc.</p>
+                        </div>
+                      </div>
+                      <div
+                        className={`flex items-center gap-3 p-4 rounded-lg border-2 cursor-pointer transition-colors ${
+                          paymentType === 'offline' 
+                            ? 'border-primary bg-primary/5' 
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                        onClick={() => setPaymentType('offline')}
+                      >
+                        <RadioGroupItem value="offline" id="payment-offline" />
+                        <div>
+                          <Label htmlFor="payment-offline" className="font-medium cursor-pointer">
+                            Offline Payment
+                          </Label>
+                          <p className="text-xs text-muted-foreground">Bank transfer, Check, etc.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                <Separator className="my-6" />
+
+                <h3 className="text-lg font-semibold mb-4">Choose Payment Method</h3>
 
                 <RadioGroup value={paymentMethod} onValueChange={(v) => setPaymentMethod(v as PaymentMethod)}>
                   <div className="grid md:grid-cols-2 gap-4 mb-6">
@@ -441,6 +495,15 @@ const { items, getTotalPrice, clearCart } = useCart();
                   </div>
                 )}
 
+                {paymentMethod === 'cash_on_delivery' && (
+                  <div className="bg-muted/50 rounded-xl p-6 mb-6 text-center">
+                    <Wallet className="w-12 h-12 mx-auto mb-4 text-primary" />
+                    <p className="text-muted-foreground">
+                      Pay with cash at the time of delivery. Please have the exact amount ready if possible. For large orders, our delivery partner may accept card on delivery where available.
+                    </p>
+                  </div>
+                )}
+
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
                   <Shield className="w-4 h-4" />
                   <span>Your payment information is encrypted and secure</span>
@@ -533,7 +596,7 @@ const { items, getTotalPrice, clearCart } = useCart();
                             {item.selectedColor && ` • Color: ${item.selectedColor}`}
                           </p>
                         </div>
-                        <p className="font-semibold">${(item.product.price * item.quantity).toFixed(2)}</p>
+                        <p className="font-semibold">₹{(item.product.price * item.quantity).toFixed(2)}</p>
                       </div>
                     ))}
                   </div>
@@ -551,7 +614,7 @@ const { items, getTotalPrice, clearCart } = useCart();
                       Processing...
                     </>
                   ) : (
-                    <>Place Order - ${total.toFixed(2)}</>
+                    <>Place Order - ₹{total.toFixed(2)}</>
                   )}
                 </Button>
               </div>
@@ -578,7 +641,7 @@ const { items, getTotalPrice, clearCart } = useCart();
                     </div>
                     <div className="flex-1">
                       <p className="text-sm font-medium line-clamp-1">{item.product.name}</p>
-                      <p className="text-sm text-muted-foreground">${item.product.price}</p>
+                      <p className="text-sm text-muted-foreground">₹{item.product.price}</p>
                     </div>
                   </div>
                 ))}
@@ -592,15 +655,15 @@ const { items, getTotalPrice, clearCart } = useCart();
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal</span>
-                  <span>${subtotal.toFixed(2)}</span>
+                  <span>₹{subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Shipping</span>
-                  <span>{shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}</span>
+                  <span>{shipping === 0 ? 'FREE' : `₹${shipping.toFixed(2)}`}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Tax (8%)</span>
-                  <span>${tax.toFixed(2)}</span>
+                  <span>₹{tax.toFixed(2)}</span>
                 </div>
               </div>
 
@@ -608,7 +671,7 @@ const { items, getTotalPrice, clearCart } = useCart();
 
               <div className="flex justify-between text-lg font-bold">
                 <span>Total</span>
-                <span>${total.toFixed(2)}</span>
+                <span>₹{total.toFixed(2)}</span>
               </div>
 
               {totalPrice >= 50 && (
@@ -632,6 +695,7 @@ const { items, getTotalPrice, clearCart } = useCart();
           </div>
         </div>
       </main>
+  <OrderSuccessModal isOpen={showSuccessModal} />
 
       <Footer />
     </div>

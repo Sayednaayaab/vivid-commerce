@@ -91,10 +91,10 @@ export function FlashSaleSection() {
                   </span>
                   <h3 className="font-medium mt-1 line-clamp-2">{product.name}</h3>
                   <div className="flex items-center gap-2 mt-3">
-                    <span className="text-lg font-bold">${product.price}</span>
+                    <span className="text-lg font-bold">₹{product.price}</span>
                     {product.originalPrice && (
                       <span className="text-sm text-muted-foreground line-through">
-                        ${product.originalPrice}
+                        ₹{product.originalPrice}
                       </span>
                     )}
                   </div>

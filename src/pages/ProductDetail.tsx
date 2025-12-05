@@ -17,6 +17,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CartSidebar } from "@/components/cart/CartSidebar";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { getProductById, products } from "@/data/products";
 import { useCart } from "@/hooks/useCart";
 import { useWishlist } from "@/hooks/useWishlist";
@@ -153,15 +154,15 @@ export default function ProductDetail() {
                   </span>
                 </div>
                 <div className="flex items-baseline gap-3">
-                  <span className="text-3xl font-bold">${product.price}</span>
+                  <span className="text-3xl font-bold">₹{product.price}</span>
                   {product.originalPrice && (
-                    <span className="text-xl text-muted-foreground line-through">
-                      ${product.originalPrice}
+                    <span className="text-lg text-muted-foreground line-through">
+                      ₹{product.originalPrice}
                     </span>
                   )}
                   {product.discount && (
                     <span className="px-2 py-1 text-sm font-semibold bg-destructive/10 text-destructive rounded-md">
-                      Save ${product.originalPrice! - product.price}
+                      Save ₹{(product.originalPrice! - product.price).toFixed(2)}
                     </span>
                   )}
                 </div>
@@ -170,6 +171,42 @@ export default function ProductDetail() {
               <p className="text-muted-foreground leading-relaxed">
                 {product.description}
               </p>
+
+              {product.longDescription && (
+                <div className="mt-4">
+                  <Separator className="my-4" />
+                  <h3 className="text-lg font-semibold mb-2">Product Details</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{product.longDescription}</p>
+                </div>
+              )}
+
+              {product.reviews && product.reviews.length > 0 && (
+                <div className="mt-6">
+                  <Separator className="my-4" />
+                  <h3 className="text-lg font-semibold mb-3">Customer Reviews ({product.reviewCount})</h3>
+                  <div className="space-y-4">
+                    {product.reviews.map((r, idx) => (
+                      <div key={idx} className="bg-muted/30 rounded-lg p-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-3">
+                            <div className="w-9 h-9 bg-primary/10 rounded-full flex items-center justify-center font-medium">{r.user.charAt(0)}</div>
+                            <div>
+                              <p className="font-medium">{r.user}</p>
+                              <p className="text-xs text-muted-foreground">{r.date}</p>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1 text-yellow-500">
+                            {Array.from({ length: 5 }).map((_, i) => (
+                              <Star key={i} className={`w-4 h-4 ${i < r.rating ? 'fill-yellow-500 text-yellow-500' : 'text-muted-foreground'}`} />
+                            ))}
+                          </div>
+                        </div>
+                        <p className="text-sm text-muted-foreground">{r.comment}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Color Selection */}
               {product.colors && product.colors.length > 0 && (

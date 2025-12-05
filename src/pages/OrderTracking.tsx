@@ -289,14 +289,14 @@ const OrderTracking = () => {
                           <p className="font-medium text-sm line-clamp-1">{item.productName}</p>
                           <p className="text-xs text-muted-foreground">Qty: {item.quantity}</p>
                         </div>
-                        <p className="font-medium">${(item.price * item.quantity).toFixed(2)}</p>
+                        <p className="font-medium">₹{(item.price * item.quantity).toFixed(2)}</p>
                       </div>
                     ))}
                   </div>
                   <Separator className="my-4" />
                   <div className="flex justify-between font-bold">
                     <span>Total</span>
-                    <span>${order.total.toFixed(2)}</span>
+                    <span>₹{order.total.toFixed(2)}</span>
                   </div>
                 </div>
               </div>

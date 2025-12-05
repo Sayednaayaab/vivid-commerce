@@ -61,7 +61,7 @@ export function HeroSection() {
             <div className="flex flex-wrap justify-center lg:justify-start gap-6 pt-4">
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <Truck className="w-5 h-5 text-primary" />
-                <span>Free Shipping $50+</span>
+                <span>Free Shipping ₹50+</span>
               </div>
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <RotateCcw className="w-5 h-5 text-primary" />
