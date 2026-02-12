@@ -18,9 +18,8 @@
 
 ## 🌐 Live Demo
 
-🚀 **[View Live Demo](https://your-username.github.io/vivid-commerce)**
+🚀 **[View Live Demo](https://vivid-commerce.vercel.app/)**
 
-*(Replace with your actual live demo URL)*
 
 ---
 
@@ -180,12 +179,107 @@ src/
 
 ## 📸 Screenshots
 
-*(Add screenshots here to showcase the UI)*
+<div align="center">
 
-- Homepage with hero section and product grid
-- Product detail page with reviews
-- Cart and checkout flow
-- User account and order tracking
+<h3>🔐 Smart Authentication Experience</h3>
+
+<img src="https://github.com/user-attachments/assets/ac71ae67-35f4-43b4-9f19-f274d92fb330"
+     alt="Smart Authentication Experience"
+     width="95%"
+     style="border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 10px;" />
+
+<p><em>Elegant login & signup flow with Google authentication and secure form validation.</em></p>
+
+<br/>
+
+<h3>🏠 Immersive Shopping Homepage</h3>
+
+<img src="https://github.com/user-attachments/assets/5c27b33a-57da-4e34-acd9-fcd3460609ac"
+     alt="Immersive Shopping Homepage"
+     width="95%"
+     style="border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 10px;" />
+
+<p><em>Featured products, flash sales, and curated categories designed for engagement.</em></p>
+
+<br/>
+
+<h3>🗂 Intelligent Product Discovery</h3>
+
+<img src="https://github.com/user-attachments/assets/149452bf-845f-44a8-a3fe-de5ef6f3d961"
+     alt="Intelligent Product Discovery"
+     width="95%"
+     style="border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 10px;" />
+
+<p><em>Advanced filtering, sorting, and category navigation for seamless browsing.</em></p>
+
+<br/>
+
+<h3>📊 Product Insights Dashboard</h3>
+
+<img src="https://github.com/user-attachments/assets/bd2ed9f3-ba5e-4d63-91c3-6649b63b73b3"
+     alt="Product Insights Dashboard"
+     width="85%"
+     style="border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 10px;" />
+
+<p><em>Comprehensive product details, ratings, and interactive review system.</em></p>
+
+<br/>
+
+<h3>🚚 Streamlined Shipping Flow</h3>
+
+<img src="https://github.com/user-attachments/assets/149f9f9f-5153-4c2e-8abb-c009dcf0f806"
+     alt="Streamlined Shipping Flow"
+     width="85%"
+     style="border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 10px;" />
+
+<p><em>User-friendly shipping details form with validation and responsive layout.</em></p>
+
+<br/>
+
+<h3>💳 Secure Payment Experience</h3>
+
+<img src="https://github.com/user-attachments/assets/02f74e2d-1233-450d-bb69-991727353133"
+     alt="Secure Payment Experience"
+     width="85%"
+     style="border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 10px;" />
+
+<p><em>Clean and intuitive payment interface with multi-step checkout design.</em></p>
+
+<br/>
+
+<h3>🎉 Purchase Success Screen</h3>
+
+<img src="https://github.com/user-attachments/assets/06af3fb7-1e38-460f-ac5e-72d0ce20e22b"
+     alt="Purchase Success Screen"
+     width="75%"
+     style="border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 10px;" />
+
+<p><em>Visually engaging confirmation page with detailed order summary.</em></p>
+
+<br/>
+
+<h3>📦 Real-Time Order Tracking</h3>
+
+<img src="https://github.com/user-attachments/assets/70e945ca-0af8-4f7b-9b03-e57ca77616d3"
+     alt="Real-Time Order Tracking"
+     width="75%"
+     style="border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 10px;" />
+
+<p><em>Track shipment progress and review order history in real time.</em></p>
+
+<br/>
+
+<h3>👤 Personalized User Dashboard</h3>
+
+<img src="https://github.com/user-attachments/assets/cc50b9f2-194a-47f7-a3b5-962d5434cf10"
+     alt="Personalized User Dashboard"
+     width="95%"
+     style="border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 10px;" />
+
+<p><em>Manage profile information, orders, and account preferences.</em></p>
+
+</div>
+
 
 ## 🤝 Contributing
 
@@ -211,9 +305,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 
 **Your Name**
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/your-profile)
-- Portfolio: [Your Portfolio](https://your-portfolio.com)
-- Email: your.email@example.com
+- LinkedIn: [Sayednaayaab](https://www.linkedin.com/in/sayed-mirchoni/)
+- Portfolio: [ My Portfolio](https://personal-portfolio-7dqj.vercel.app/)
+- Email: www.naayaab2004@gmail.com
 
 ## 🙏 Acknowledgments
 
