@@ -43,7 +43,7 @@ export function OrderSuccessModal({ isOpen }: OrderSuccessModalProps) {
     // Play a short synthesized party blaster sound
     const playPartySound = async () => {
       try {
-        const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+        const AudioCtx = window.AudioContext || ((window as Record<string, unknown>).webkitAudioContext as typeof window.AudioContext);
         const ctx = new AudioCtx();
         audioRef.current = ctx;
 

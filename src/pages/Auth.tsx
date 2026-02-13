@@ -77,15 +77,15 @@ const Auth = () => {
   // Google Identity Services setup
   const googleButtonRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    const clientId = (import.meta as any).env?.VITE_GOOGLE_CLIENT_ID;
+    const clientId = (import.meta as Record<string, unknown>).env?.VITE_GOOGLE_CLIENT_ID;
     if (!clientId) return; // user must provide a client id in env
 
-    const existing = (window as any).google;
+    const existing = (window as Record<string, unknown>).google;
     function initGsi() {
       try {
-        (window as any).google.accounts.id.initialize({
+        (window as Record<string, unknown>).google.accounts.id.initialize({
           client_id: clientId,
-          callback: (response: any) => {
+          callback: (response: Record<string, unknown>) => {
             try {
               const credential = response?.credential;
               if (!credential) return;
@@ -103,10 +103,10 @@ const Auth = () => {
         });
 
         if (googleButtonRef.current) {
-          (window as any).google.accounts.id.renderButton(googleButtonRef.current, { theme: "outline", size: "large" });
+          (window as Record<string, unknown>).google.accounts.id.renderButton(googleButtonRef.current, { theme: "outline", size: "large" });
         }
-      } catch (e) {
-        // ignore
+      } catch (err) {
+        console.warn('Failed to initialize Google Sign-In', err);
       }
     }
 
@@ -187,14 +187,14 @@ const Auth = () => {
               </form>
 
               <div className="mt-4">
-                {((import.meta as any).env?.VITE_GOOGLE_CLIENT_ID) && (
+                {((import.meta as Record<string, unknown>).env?.VITE_GOOGLE_CLIENT_ID) && (
                   <div className="mb-4">
                     <div className="text-center text-sm text-muted-foreground mb-3">Or continue with</div>
                     <div ref={googleButtonRef} className="flex justify-center" />
                   </div>
                 )}
                 <div className="text-sm text-muted-foreground text-center">By continuing you agree to our terms and privacy.</div>
-                {!((import.meta as any).env?.VITE_GOOGLE_CLIENT_ID) && (
+                {!((import.meta as Record<string, unknown>).env?.VITE_GOOGLE_CLIENT_ID) && (
                   <details className="mt-4 text-xs text-muted-foreground cursor-pointer">
                     <summary className="font-medium">Want to enable Google sign-in?</summary>
                     <div className="mt-2 p-2 bg-slate-50 rounded text-left">

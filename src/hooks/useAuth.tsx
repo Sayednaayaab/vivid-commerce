@@ -10,7 +10,7 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+export const AuthProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
     try {
       return localStorage.getItem("isAuthenticated") === "true";
@@ -34,7 +34,9 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
 
       if (userEmail) localStorage.setItem("auth_user", userEmail);
       else localStorage.removeItem("auth_user");
-    } catch {}
+    } catch (err) {
+      console.warn('Failed to update localStorage:', err);
+    }
   }, [isAuthenticated, userEmail]);
 
   const login = (email?: string | null) => {
@@ -58,7 +60,7 @@ export const useAuth = () => {
   return ctx;
 };
 
-export const RequireAuth: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+export const RequireAuth: React.FC<React.PropsWithChildren> = ({ children }) => {
   const { isAuthenticated } = useAuth();
   if (!isAuthenticated) return <Navigate to="/" replace />;
   return <>{children}</>;

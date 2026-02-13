@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -20,7 +20,7 @@ import {
   Home
 } from "lucide-react";
 
-const statusConfig: Record<OrderStatus, { label: string; icon: any; color: string }> = {
+const statusConfig: Record<OrderStatus, { label: string; icon: React.ComponentType<{ className?: string }>; color: string }> = {
   pending: { label: 'Order Placed', icon: Clock, color: 'text-yellow-500' },
   confirmed: { label: 'Confirmed', icon: CheckCircle2, color: 'text-blue-500' },
   processing: { label: 'Processing', icon: Package, color: 'text-purple-500' },
